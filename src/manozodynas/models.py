@@ -43,3 +43,23 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         "Returns the short name for the user."
         return self.first_name
+
+class Word(models.Model):
+    CATEGORIES = (
+        ('n', 'Noun'),
+        ('adj', 'Adjective'),
+        ('v', 'Verb'),
+    )
+    word = models.CharField(_('word'), max_length=35, blank=False)
+    category = models.CharField(_('category'), max_length=3, choices=CATEGORIES, blank=True)
+
+    def __str__(self):
+        return  "%s %s" % (self.word, self.category)
+
+class Translation(models.Model):
+    translation = models.CharField(_('translation'), max_length=35, blank=False)
+    word = models.ManyToManyField('Word')
+    description = models.TextField(_('description'), null=True, blank=True)
+
+    def __str__(self):
+        return self.translation
