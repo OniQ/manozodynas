@@ -1,0 +1,32 @@
+#word-list{
+    list-style-type:none;
+    font-size:15pt;
+}
+.pagination{
+    padding-left:40pt;
+}
+#navbar ul
+{
+list-style-type:none;
+width: 100%;
+float: left;
+}
+#navbar li
+{
+ float:left;
+}
+#navbar li a
+{
+ font-family: Verdana;
+ display: block;
+ width: 100px;
+ padding: 5px;
+ text-align: center;
+ background: #1d6991;
+ color: white;
+ text-decoration: none;
+}
+#navbar li a:hover
+{
+background: #55a1c8;
+}

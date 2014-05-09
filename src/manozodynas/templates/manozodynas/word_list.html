@@ -1,0 +1,29 @@
+{% extends "manozodynas/base.html" %}
+
+{% block title %}Žodžiai{% endblock %}
+
+{% block content %}
+<button onclick="location.href='word'">Naujas žodis</button>
+<ul id="word-list">
+{% for word in object_list %}
+    <li>{{ word.word }} ({{ word.category }})</li>
+{% empty %}
+    <li>Žodžių sąrašas tuščias</li>
+{% endfor %}
+</ul>
+{% if is_paginated %}
+        <div class="pagination">
+            <div class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </div>
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/words?page={{ page_obj.previous_page_number }}">ankstesnis</a>
+                {% endif %}
+                {% if page_obj.has_next %}
+                    <a href="/words?page={{ page_obj.next_page_number }}">kitas</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}
