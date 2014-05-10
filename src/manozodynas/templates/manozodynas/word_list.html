@@ -6,7 +6,16 @@
 <button onclick="location.href='word'">Naujas žodis</button>
 <ul id="word-list">
 {% for word in object_list %}
-    <li>{{ word.word }} {% if word.category != "" %} ({{ word.category }}) {% endif %} <a href="word/{{word.id}}/delete" class="list-button">Ištrinti</a></li>
+    <li>{{ word.word }} {% if word.category != "" %} <i>{{ word.category }}</i> {% endif %}
+    {% if word.translation_set.all|length == 0 %}
+        <a href="word/{{word.id}}/translate" class="list-button">Išversti</a>
+    {% elif word.translation_set.all|length == 1 %}
+        <a href="word/{{word.id}}/view" class="list-button">Vertimas</a>
+    {% else %}
+        <a href="word/{{word.id}}/view" class="list-button">Vertimai({{word.translation_set.all|length}})</a>
+    {% endif %}
+    <a href="word/{{word.id}}/delete" class="list-button">Ištrinti</a>
+    </li>
 {% empty %}
     <li>Žodžių sąrašas tuščias</li>
 {% endfor %}
@@ -25,5 +34,5 @@
                 {% endif %}
             </span>
         </div>
-    {% endif %}
+{% endif %}
 {% endblock %}

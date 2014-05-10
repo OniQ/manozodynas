@@ -55,8 +55,6 @@ class Word(models.Model):
     word = models.CharField(_('word'), max_length=35, blank=False)
     category = models.CharField(_('category'), max_length=3, choices=CATEGORIES, blank=True)
 
-    def get_absolute_url(self):
-        return reverse('word-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return  "%s %s" % (self.word, self.category)

@@ -1,0 +1,20 @@
+{% extends "manozodynas/base.html" %}
+
+{% block title %}Vertimai{% endblock %}
+
+{% block content %}
+<button onclick="location.href='/word/{{word.id}}/translate'">Pridėtį vertimą</button>
+<h2>{{word.word}}</h2>
+<ul id="trans-list">
+{% for trans in word.translation_set.all %}
+    <p>
+    <li>
+    {{trans.translation}}
+    {% if trans.description %}
+    <div class="description">{{trans.description}}</div>
+    {% endif %}
+    </li>
+    </p>
+{% endfor %}
+<ul>
+{% endblock %}
