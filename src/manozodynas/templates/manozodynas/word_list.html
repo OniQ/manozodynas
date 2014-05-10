@@ -6,7 +6,7 @@
 <button onclick="location.href='word'">Naujas žodis</button>
 <ul id="word-list">
 {% for word in object_list %}
-    <li>{{ word.word }} ({{ word.category }})</li>
+    <li>{{ word.word }} {% if word.category != "" %} ({{ word.category }}) {% endif %} <a href="word/{{word.id}}/delete" class="list-button">Ištrinti</a></li>
 {% empty %}
     <li>Žodžių sąrašas tuščias</li>
 {% endfor %}
@@ -14,7 +14,7 @@
 {% if is_paginated %}
         <div class="pagination">
             <div class="page-current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    Puslapis {{ page_obj.number }} iš {{ page_obj.paginator.num_pages }}.
             </div>
             <span class="page-links">
                 {% if page_obj.has_previous %}

@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserM
 from django.core import validators
 from django.db import models
 from django.utils import timezone
+from django import forms
+from django.core.urlresolvers import reverse
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -53,12 +55,16 @@ class Word(models.Model):
     word = models.CharField(_('word'), max_length=35, blank=False)
     category = models.CharField(_('category'), max_length=3, choices=CATEGORIES, blank=True)
 
+    def get_absolute_url(self):
+        return reverse('word-detail', kwargs={'pk': self.pk})
+
     def __str__(self):
         return  "%s %s" % (self.word, self.category)
 
+
 class Translation(models.Model):
     translation = models.CharField(_('translation'), max_length=35, blank=False)
-    word = models.ManyToManyField('Word')
+    srcWord = models.ForeignKey(Word)
     description = models.TextField(_('description'), null=True, blank=True)
 
     def __str__(self):

@@ -2,6 +2,11 @@
     list-style-type:none;
     font-size:15pt;
 }
+.list-button{
+    color:red;
+    font-size:12pt;
+    text-decoration:none;
+}
 .pagination{
     padding-left:40pt;
 }
